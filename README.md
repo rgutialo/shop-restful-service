@@ -1,4 +1,4 @@
-## Shop Restful Service
+### Shop Restful Service
 
 This is a RESTful API for a Shop entity.
  
