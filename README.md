@@ -1,6 +1,6 @@
-#Shop Rest Service
+#Shop Restful Service
 
-This is a RESTful(ish) API for a Shop entity.
+This is a RESTful API for a Shop entity.
  
 
 ### Prerequisites
