@@ -42,7 +42,7 @@ We decided to use an asynchronous connection to Google API because restful servi
 
 #### Rest
 
-In order to respect the REST constraints, we decided to implement this service using Spring HATEOAS. In all cases, this service returns an HTTEntity with HttpStatus (OK, NOT FOUND).
+In order to respect the REST constraints, we decided to implement this service using Spring HATEOAS. In all cases, this service returns an HTTEntity with HttpStatus (OK, CREATED, NOT FOUND).
 Furthermore, this service returns not only the JSON object, but also the location of the resource returned.
 
 ### Comments
