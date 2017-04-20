@@ -14,7 +14,6 @@ public class Address implements Serializable {
 	private int number;
 	private String zipCode;
 	private String countryID;
-	@Autowired
 	private Geolocation geoloc;
 	
 	private static final long serialVersionUID = 6210366512436661558L;

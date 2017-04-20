@@ -20,8 +20,15 @@ You can use this service in order to learn how to create a rest(ful) service und
 ```sh
 './gradlew build' under Linux OR 'gradlew.bat build' under Windows
 ```
-That generates the binary `./build/libs/shop-service-0.0.1-SNAPSHOT.jar`
+That generates the binary `./build/libs/shop-rest-service-0.1.0.jar`
 
+#### Testing the Service
+
+##### Java
+We have made som simple serialization json-tests. To execute them, just run:  
+```sh
+'./gradlew test' # under Linux OR 'gradlew.bat test' under windows
+```
 
 ### Decisions made
 

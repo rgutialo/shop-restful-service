@@ -1,0 +1,12 @@
+{
+	"shopName": "shop_N1",
+	"shopAddress": {
+		"number": 1,
+		"zipCode": "WC2E 8HD",
+		"countryID": "GB",
+			"geoloc": {
+			"latitude": null,
+			"longitude": null
+		}
+	}
+}
