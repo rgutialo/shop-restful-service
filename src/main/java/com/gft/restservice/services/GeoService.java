@@ -1,6 +1,7 @@
-package com.main.services;
+package com.gft.restservice.services;
 
 
+import com.gft.restservice.model.Geolocation;
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.GeocodingApiRequest;
@@ -8,7 +9,6 @@ import com.google.maps.PendingResult;
 import com.google.maps.model.ComponentFilter;
 import com.google.maps.model.GeocodingResult;
 import com.google.maps.model.Geometry;
-import com.model.Geolocation;
 
 /**
  * Base class for Geolocate places
@@ -44,8 +44,7 @@ public class GeoService {
 	 * @param countryID
 	 * @return Geolocation object inicialized with latitude and longitude
 	 */
-    public static Geolocation geolocate(String zipCode, String countryID) 
-    {
+    public static Geolocation geolocate(String zipCode, String countryID){
     	
     	Geolocation geoloc = new Geolocation();
     	
@@ -71,8 +70,4 @@ public class GeoService {
          
          return geoloc;
     }
-
-	
-	
-
 }

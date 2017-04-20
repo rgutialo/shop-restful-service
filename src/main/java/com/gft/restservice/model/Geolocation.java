@@ -1,8 +1,9 @@
-package com.model;
+package com.gft.restservice.model;
 
 import java.io.Serializable;
 
-import com.main.services.GeoService;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gft.restservice.services.GeoService;
 
 /**
  * Base class for Geolocation Entity
@@ -13,19 +14,20 @@ public class Geolocation implements Serializable{
 	
 	private Double latitude;
 	private Double longitude;
-	private Double distance;
+	
+	//calculated data from latitude and longitude in runtime
+	@JsonIgnore
+	private transient Double distance;
 	
 	private static final long serialVersionUID = 6210366512436661558L;
 	
-	public Geolocation()
-	{		
+	public Geolocation(){		
 		this.latitude = null;
 		this.longitude = null;
 		this.distance = null;
 	}
 	
-	public Geolocation(Double lat, Double lon, Double hereLat, Double hereLon)
-	{		
+	public Geolocation(Double lat, Double lon, Double hereLat, Double hereLon){		
 		this.latitude = lat;
 		this.longitude = lon;
 		if (hereLat == null || hereLon == null)
@@ -57,8 +59,7 @@ public class Geolocation implements Serializable{
 	 * @param lon longitude's point
 	 * 
 	 */
-	public void setDistanceKm (Double lat, Double lon)
-	{
+	public void setDistanceKm (Double lat, Double lon){
 		this.distance = GeoService.getDistance(this.getLatitude(),this.getLongitude(), lat, lon);
 	}
 
@@ -69,6 +70,4 @@ public class Geolocation implements Serializable{
 	public void setDistance(Double distance) {
 		this.distance = distance;
 	}
-	
-	
 }

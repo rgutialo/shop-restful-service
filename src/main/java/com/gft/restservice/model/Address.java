@@ -1,4 +1,4 @@
-package com.model;
+package com.gft.restservice.model;
 
 import java.io.Serializable;
 
@@ -19,16 +19,14 @@ public class Address implements Serializable {
 	
 	private static final long serialVersionUID = 6210366512436661558L;
 	
-	public Address()
-	{
+	public Address(){
 		this.number = 0;
 		this.zipCode = "";
 		this.countryID = "";
 		this.geoloc = new Geolocation();
 	}
 	
-	public Address (int number, String zipCode, String countID, Double latitude, Double longitude, Double hereLat, Double hereLon)
-	{
+	public Address (int number, String zipCode, String countID, Double latitude, Double longitude, Double hereLat, Double hereLon){
 		this.number = number;
 		this.zipCode = zipCode;
 		this.countryID = countID;	
@@ -66,11 +64,4 @@ public class Address implements Serializable {
 	public void setCountryID(String countryID) {
 		this.countryID = countryID;
 	}
-	
-	
-	
-	
-
-	
-
 }
