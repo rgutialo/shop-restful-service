@@ -26,7 +26,7 @@ That generates the binary `./build/libs/shop-rest-service-0.1.0.jar`
 
 We have made some simple serialization json-tests. To execute them, just run:  
 ```sh
-'./gradlew test' # under Linux OR 'gradlew.bat test' under windows
+'./gradlew test' under Linux OR 'gradlew.bat test' under windows
 ```
 
 ### Decisions made
