@@ -10,24 +10,24 @@ import com.gft.restservice.services.GeoService;
  * 
  * @author Raul Gutierrez
  */
-public class Geolocation implements Serializable{
-	
+public class Geolocation implements Serializable {
+
 	private Double latitude;
 	private Double longitude;
-	
-	//calculated data from latitude and longitude in runtime
+
+	// calculated data from latitude and longitude in runtime
 	@JsonIgnore
 	private transient Double distance;
-	
+
 	private static final long serialVersionUID = 6210366512436661558L;
-	
-	public Geolocation(){		
+
+	public Geolocation() {
 		this.latitude = null;
 		this.longitude = null;
 		this.distance = null;
 	}
-	
-	public Geolocation(Double lat, Double lon, Double hereLat, Double hereLon){		
+
+	public Geolocation(Double lat, Double lon, Double hereLat, Double hereLon) {
 		this.latitude = lat;
 		this.longitude = lon;
 		if (hereLat == null || hereLon == null)
@@ -51,16 +51,19 @@ public class Geolocation implements Serializable{
 	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
-	
-	
+
 	/**
-	 * Sets the distance in kilometers from a place to the point placed in the instance object
-	 * @param lat latitude's point
-	 * @param lon longitude's point
+	 * Sets the distance in kilometers from a place to the point placed in the
+	 * instance object
+	 * 
+	 * @param lat
+	 *            latitude's point
+	 * @param lon
+	 *            longitude's point
 	 * 
 	 */
-	public void setDistanceKm (Double lat, Double lon){
-		this.distance = GeoService.getDistance(this.getLatitude(),this.getLongitude(), lat, lon);
+	public void setDistanceKm(Double lat, Double lon) {
+		this.distance = GeoService.getDistance(this.getLatitude(), this.getLongitude(), lat, lon);
 	}
 
 	public Double getDistance() {

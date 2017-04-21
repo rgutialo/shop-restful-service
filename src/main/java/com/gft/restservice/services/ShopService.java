@@ -65,7 +65,7 @@ public class ShopService {
 			newShop.getShopAddress().setGeoloc(geoloc);
 			this.shopRepo.saveShop(newShop);
 		});
-		
+
 		return this.shopRepo.saveShop(newShop);
 
 	}
