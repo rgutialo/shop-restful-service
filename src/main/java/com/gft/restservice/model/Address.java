@@ -2,8 +2,6 @@ package com.gft.restservice.model;
 
 import java.io.Serializable;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 /**
  * Base class for Address Entity
  * 

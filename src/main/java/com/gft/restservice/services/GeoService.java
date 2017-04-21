@@ -1,7 +1,10 @@
 package com.gft.restservice.services;
 
 
+import java.util.concurrent.CompletableFuture;
+
 import com.gft.restservice.model.Geolocation;
+import com.gft.restservice.model.Shop;
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.GeocodingApiRequest;
@@ -40,25 +43,23 @@ public class GeoService {
     
 	/**
 	 * Get the coordinates when receiving a zip Code and a Country ID. 
-	 * @param zipCode 
-	 * @param countryID
-	 * @return Geolocation object inicialized with latitude and longitude
+	 * @param shop Shop to geolocate
+	 * @return Geolocation object with latitude and longitude
 	 */
-    public static Geolocation geolocate(String zipCode, String countryID){
+    public CompletableFuture<Geolocation> geolocate(Shop pShop){
     	
-    	Geolocation geoloc = new Geolocation();
+    	CompletableFuture<Geolocation> geoloc = new CompletableFuture<Geolocation>();
     	
     	GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyBkNfsZ867XNB90YE0aY-uAQmXZHCeAocA"); 
     	 GeocodingApiRequest req = GeocodingApi.newRequest(context)
-                 .components(ComponentFilter.country(countryID), ComponentFilter.postalCode(zipCode));
+                 .components(ComponentFilter.country(pShop.getShopAddress().getCountryID()), ComponentFilter.postalCode(pShop.getShopAddress().getZipCode()));
 
          req.setCallback(new PendingResult.Callback<GeocodingResult[]>() {
              @Override
              public void onResult(GeocodingResult[] result) {
                  if (result != null && result.length > 0) {
                      Geometry geometry = result[0].geometry;
-                     geoloc.setLatitude(geometry.location.lat);
-                     geoloc.setLongitude(geometry.location.lng);
+                     geoloc.complete (new Geolocation (geometry.location.lat, geometry.location.lng, null, null));
                  }
              }
 
@@ -66,8 +67,8 @@ public class GeoService {
              public void onFailure(Throwable e) {
             	
              }
+             
          });
-         
-         return geoloc;
+         return geoloc;       
     }
 }

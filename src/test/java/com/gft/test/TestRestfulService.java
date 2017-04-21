@@ -40,32 +40,26 @@ public class TestRestfulService {
         );
 		
 		for (Shop shop : temporaryShops) {
-			shop.geolocate();
+			shopsDemoTest.getGeoService().geolocate(shop);
 			shopsDemoTest.addShop(shop);
         }
 	}
 		
 	@Test
-    public void saveNewShop() throws Exception {
-        
+    public void saveNewShop() throws Exception {        
 		String jsonShop = "{\"shopName\":\"shop_N4\",\"shopAddress\":{\"number\":4,\"zipCode\":\"46001\",\"countryID\":\"ES\"}}";
-		//Shop shopN4 = new Shop("shop_N4",4,"11101","ES",null,null,null,null);
 		this.mockMvc.perform(post("/shops/").contentType(MediaType.APPLICATION_JSON_UTF8).content(jsonShop)).andExpect(status().isCreated());
 	}
 	
 	@Test
-    public void saveExistingShop() throws Exception {
-        
+    public void saveExistingShop() throws Exception {        
 		String jsonShop = "{\"shopName\":\"shop_N3\",\"shopAddress\":{\"number\":5,\"zipCode\":\"11100\",\"countryID\":\"ES\"}}";
-		//Shop shopN4 = new Shop("shop_N4",4,"11101","ES",null,null,null,null);
 		this.mockMvc.perform(post("/shops/").contentType(MediaType.APPLICATION_JSON_UTF8).content(jsonShop)).andExpect(status().isOk());
 	}
 	
 	@Test
     public void getShops() throws Exception {
-        this.mockMvc.
-        perform(get("/shops/")).
-        andExpect(status().isOk());
+        this.mockMvc.perform(get("/shops/")).andExpect(status().isOk());
     }
 
 }

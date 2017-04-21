@@ -4,7 +4,6 @@ import java.util.Comparator;
 
 import org.springframework.hateoas.ResourceSupport;
 
-import com.gft.restservice.services.GeoService;
 
 /**
  * Base class for Shop Entity
@@ -16,7 +15,7 @@ public class Shop extends ResourceSupport implements Comparable<Shop> {
 	private String shopName;	
 	private Address shopAddress;
 	
-	
+
 	public Shop() {
 		this.shopName = "";
 		this.shopAddress = new Address();
@@ -46,16 +45,7 @@ public class Shop extends ResourceSupport implements Comparable<Shop> {
 
 	public void setShopAddress(Address shopAddress) {
 		this.shopAddress = shopAddress;
-	}
-	
-	/**
-	 * Geolocates (asyncrhonous) a shop using service Geoservice. 
-	 * 
-	 */
-	public void geolocate(){
-		Geolocation geoloc = GeoService.geolocate(this.getShopAddress().getZipCode(), this.getShopAddress().getCountryID());
-		this.getShopAddress().setGeoloc(geoloc);				
-	}
+	}		
 
 	/**
 	 * Overrides compareTo method from Comparable in order to use sort from Collection

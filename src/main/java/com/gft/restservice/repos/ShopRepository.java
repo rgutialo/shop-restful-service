@@ -36,7 +36,7 @@ public class ShopRepository {
 	 * @param shop Shop to add
 	 * @return return the shop that was added or last version of same shop if exists previously
 	 */
-	public Shop addShop(Shop newShop) {
+	public Shop saveShop(Shop newShop) {
 		Shop previousShop = shopsDemo.put(newShop.getShopName(), newShop);		
 		return previousShop;
 	}
