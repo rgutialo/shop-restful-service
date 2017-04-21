@@ -45,6 +45,10 @@ We decided to use an asynchronous connection to Google API because restful servi
 In order to respect the REST constraints, we decided to implement this service using Spring HATEOAS. In all cases, this service returns an HTTEntity with HttpStatus (OK, CREATED, NOT FOUND).
 Furthermore, this service returns not only the JSON object, but also the location of the resource returned.
 
+### Future improvements
+
+We could improve our system including products management and stock control. We have to show to our clients not only the nearest shop, but also products they have. We could manage products to show to our clients what we have and the nearest shop where they could find them.
+
 ### Comments
 
 This exercise helps me to know more about Spring and Spring Boot. I worked using other frameworks as Struts or architectures as SOAP Services.
