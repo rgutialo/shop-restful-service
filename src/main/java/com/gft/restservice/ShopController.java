@@ -1,10 +1,7 @@
 package com.gft.restservice;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gft.restservice.model.Shop;
 import com.gft.restservice.services.ShopService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -26,20 +24,17 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 @RestController
 public class ShopController {
 
-    private Map<String,Shop> shopsDemo;
+    @Autowired 
+    ShopService shopserv;
     
-    public ShopController() {    	
-    	//Used ConcurrentHashMap in this example in order to allow concurrent transactions between users
-    	shopsDemo  = new ConcurrentHashMap<String,Shop> ();
-    }
       
     @RequestMapping(value="/shops", method = RequestMethod.GET, produces = MediaTypes.HAL_JSON_VALUE)
     public HttpEntity<List<Shop>> getShop(@RequestParam(value = "lat", required = false) Double lat, @RequestParam(value = "long", required = false) Double lon) {
     	
-    	List<Shop> tempShops = new ArrayList<Shop>(shopsDemo.values());
+    	List<Shop> tempShops = new ArrayList<Shop>(shopserv.shopsList());
     	List<Shop> result = new ArrayList<Shop>();
     	
-    	if (shopsDemo.isEmpty())
+    	if (shopserv.isEmpty())
     		//return no shops found 
     		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
@@ -49,7 +44,7 @@ public class ShopController {
     		if (lat != null && lon != null)
 	    	{
 	    		//we use shop service to get distances   			
-    			ShopService.listByProximity(tempShops, lat, lon);
+    			shopserv.listByProximity(tempShops, lat, lon);
     			result.add(tempShops.get(0));
 	    		return new ResponseEntity<List<Shop>> (result, HttpStatus.OK);	    		
 	    	}
@@ -62,12 +57,10 @@ public class ShopController {
     }    
 
     @RequestMapping(value="/shops", method = RequestMethod.POST)
-    public HttpEntity<Shop> addShop(@RequestBody Shop shopParam) {
-    	//first we have to geolocate the shop we received. It's asynchronous in order to avoid deadlock
-    	shopParam.geolocate(); 	
-    	shopParam.add(linkTo(methodOn(ShopController.class, shopParam.getShopName()).findShop(shopParam.getShopName())).withSelfRel());    	
-
-    	Shop previousShop = shopsDemo.put(shopParam.getShopName(), shopParam);
+    public HttpEntity<Shop> addShop(@RequestBody Shop shopParam) {    	  	
+    	//add the shop to repository and receive previous version (if exists)
+    	Shop previousShop = shopserv.addShop(shopParam);
+    	shopParam.add(linkTo(methodOn(ShopController.class, shopParam.getShopName()).findShop(shopParam.getShopName())).withSelfRel());
     	
     	if (previousShop == null)    		    	
     		//no previous shop in memory. Return the new shop created in memory
@@ -79,8 +72,8 @@ public class ShopController {
     
     @GetMapping(path = "/{sName}")
     public HttpEntity<Shop> findShop(@PathVariable String sName) {        
-    	if (shopsDemo.containsKey(sName))
-    		return new ResponseEntity<>(shopsDemo.get(sName), HttpStatus.OK);
+    	if (shopserv.containsShop(sName))
+    		return new ResponseEntity<>(shopserv.getShop(sName), HttpStatus.OK);
     	else
     		//return no shops found 
     		return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -6,13 +6,11 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gft.restservice.model.Shop;
 
 import java.io.IOException;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,9 +20,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TestSerializedShop {
 
     private JacksonTester<Shop> jsonShop;
-    private List<Shop> setupShops;
-    private MockMvc mockMvc;
-
 
     @Before
     public void setUp() throws Exception {   	
