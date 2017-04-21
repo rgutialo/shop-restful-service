@@ -4,7 +4,7 @@ This is a RESTful API for a Shop entity.
  
 
 ### Prerequisites
-This projects is under Spring Boot. So we need Java 8 and gradle in order to be build.
+This projects is under Spring Boot. So we need Java 8 and gradle in order to be built.
 
 ### Usage
 
@@ -33,7 +33,7 @@ We have made some serialization json-tests and some integrity tests about our ne
 
 #### Persistence
 
-We decided to use the ConcurrentHashMap class in order to allow persistence and concurrent data access. We thought it was a good decision forr this test. Obviously, in production we should think other ways to  ensure good connections and good results for final users.
+We decided to use the ConcurrentHashMap class in order to allow persistence and concurrent data access. We thought it was a good decision for this test. Obviously, in production we should think other ways to ensure good connections and good results for final users.
 
 
 #### Geolocation
@@ -47,7 +47,7 @@ Furthermore, this service returns not only the JSON object, but also the locatio
 
 ### Future improvements
 
-We could improve our system including products management and stock control. We have to show to our clients not only the nearest shop, but also products they have. We could manage products to show to our clients what we have and the nearest shop where they could find them.
+We could improve our system including products management and stock control. We have to show to our clients not only the nearest shop, but also products we have. We could manage products to show to our clients what we have and the nearest shop where they could find them.
 
 ### Comments
 
